@@ -29,4 +29,11 @@ def solution(n, m):
     return [x, (n * m) // x]   #두 수의 곱을 최대공약수 나눈 값의 정수부분 = 최대공배수(나머지가 0이기 때문에 /해도됨)
 
 
-print(15//3)
+#import math
+
+
+#def gcdlcm(a, b):
+ #   return [math.gcd(a,b) , math.lcm(a,b)]
+
+print(math.lcm(10,13))
+
