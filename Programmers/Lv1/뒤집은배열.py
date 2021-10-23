@@ -4,3 +4,4 @@ def solution(n):
     return answer
 
 print(solution(12345))
+print(reversed(['1','2','3','4']))
