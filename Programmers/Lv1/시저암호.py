@@ -5,7 +5,7 @@
 def solution(s, n):
     ls = []
     for a in s :
-        if a.isspace() : 
+        if a.isspace() :
             ls.append(a)
         else :
             ascii = ord(a)
