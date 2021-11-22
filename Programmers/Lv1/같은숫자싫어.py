@@ -16,23 +16,23 @@
 # 입출력 예 #1,2
 # 문제의 예시와 같습니다.
 
-#정확성 : 71.9 / 효율성 : 28.1
-def solution(arr):
-    answer = [arr[0]]
-    for x in arr :
-        if answer[len(answer)-1] != x :
-            answer.append(x)
-    return answer
-
-
-print(solution([1,1,3,3,0,1,1]))
-
-def no_continuous(s):
-    result = []
-    for c in s:
-        if (len(result) == 0) or (result[-1] != c):
-            result.append(c)
-    return result
+# #정확성 : 71.9 / 효율성 : 28.1
+# def solution(arr):
+#     answer = [arr[0]]
+#     for x in arr :
+#         if answer[len(answer)-1] != x :
+#             answer.append(x)
+#     return answer
+#
+#
+# print(solution([1,1,3,3,0,1,1]))
+#
+# def no_continuous(s):
+#     result = []
+#     for c in s:
+#         if (len(result) == 0) or (result[-1] != c):
+#             result.append(c)
+#     return result
 
 #슬라이싱은 인덱스값이 범위 초과해도 오류 안뜬다.
 def no_continuous(s):
@@ -41,3 +41,8 @@ def no_continuous(s):
         if a[-1:] == [i]: continue
         a.append(i)
     return a
+
+print(no_continuous([1,1,3,3,0,1,1]))
+
+ls = []
+print(ls[-1:])
