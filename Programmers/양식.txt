@@ -1,0 +1,40 @@
+태그 = 레벨 / 'Python3' / 'algorithm' / 'programmers' / '프로그래머스'
+
+![](https://blog.kakaocdn.net/dn/nck8k/btrbIdgjuaM/U4T2kXB8Z6KLbrjdDg3rJ1/img.png)
+
+<p style="color:grey; font-size:15px; text-align:center">※ 본 사진과 해당 게시글 내용의 문제 모두 프로그래머스[Programmers]사이트에 발췌해왔습니다.</p>
+
+## 💬 들어가기 앞서..
+
+
+<br/>
+
+# ❓ 문제
+```
+
+```
+<br/>
+
+# ❗ 풀이
+## My Code
+```python
+
+```
+
+
+<br/>
+
+### ❣ 다른 풀이
+**(1)**
+```python
+
+```
+
+<br/>
+
+**(2)**
+```python
+
+```
+
+<br/>
