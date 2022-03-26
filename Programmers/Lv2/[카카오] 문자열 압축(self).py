@@ -1,0 +1,26 @@
+def solution(s):
+    n = len(s)
+    result = []
+
+    for i in range(1, n + 1):
+        cnt = 1
+        tmp = ''
+        S = s[:i]
+
+        for k in range(i, n, i):
+            if S == s[k:k + i]:
+                cnt += 1
+            else:
+                if cnt < 2:
+                    tmp += S
+                else:
+                    tmp += (str(cnt) + S)
+                S = s[k:k + i]
+                cnt = 1
+        if cnt < 2:
+            tmp += S
+        else:
+            tmp += (str(cnt) + S)
+        result.append(tmp)
+    result.sort(key=lambda x: len(x))
+    return len(result[0])
