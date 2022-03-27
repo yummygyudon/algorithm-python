@@ -20,15 +20,18 @@ def key_rotate(arr) :
 
 def key_check(lock_y, lock_x,new_lock:list, key:list) :
     m = len(key)
+    n = len(new_lock)
     for i in range(m-lock_y) : #
         for k in range(m-lock_x) : #
-            if (new_lock[lock_y][lock_x] + key[i][k]) != 1 :
-                return False
+            for y in range(lock_y,n):
+                for x in range(lock_x, n):
+                    if (new_lock[y][x] + key[i][k]) != 1 :
+                        return False
     return True
 
 
 def solution(key, lock) :
-    N, M = len(lock[0]), len(key[0])
+    N, M = len(lock), len(key)
     for _ in range(4) :
         new_lock = lock.copy()
         key = key_rotate(key)

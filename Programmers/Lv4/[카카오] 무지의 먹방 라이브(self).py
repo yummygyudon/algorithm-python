@@ -25,6 +25,7 @@ def solution(food_time : list, k : int) :
     return q[0][0]
 
 
+''' 효율성 0 점, 정확성 26/32 만 맞음'''
 if __name__ == "__main__":
     food_times = [3, 1, 2]
     k = 5
