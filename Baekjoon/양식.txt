@@ -2,7 +2,7 @@
 
 ![](http://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/images/boj-og-1200.png)
 
->  게시물을 작성하면서 복습하는 문제를 선정하는 기준은<span style="color:brown"><**solved.ac** 티어 **브론즈 1 (Bronze1) 이상**></span>입니다.
+>  게시물을 작성하면서 복습하는 문제를 선정하는 기준은<span style="color:brown"><**solved.ac** 티어 **실버 2  (Silver 2) 이상**></span>입니다.
 
 
 <span style="color:grey; font-size:15px">※ 본 사진과 해당 게시글 내용의 문제 모두 <span style ="font-weight:bold">백준 : 온라인 저지[Baekjoon_OnlineJudge]</span>사이트에서 발췌해왔습니다.</span>
@@ -10,9 +10,9 @@
 
 
 # ❓ 문제
-```
 
-```
+**백준 온라인 저지 (Baekjoon Online Judge) :[]() **
+
 <br/>
 
 # ❗ 풀이
