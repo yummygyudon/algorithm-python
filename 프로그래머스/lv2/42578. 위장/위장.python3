@@ -1,0 +1,17 @@
+def solution(clothes) :
+    # 의상 종류별로
+    # (이 종류 안입음, 옷 1, 옷 2, ...)
+    # (옷1, 옷2, 옷3) & (모자1,모자2)
+    # (안입음, 옷1, 옷2, 옷3) (안입음, 모자1,모자2) -> 4 * 3 = 12
+    # 12가지 중 (안입음, 안입음) 경우 제외 -1
+    closet = {}
+    i = 1
+    for c in clothes :
+        if c[1] in closet :
+            closet[c[1]] += 1
+        else :
+            closet[c[1]] = 1
+
+    for v in closet.values() :
+        i *= v+1
+    return i - 1
