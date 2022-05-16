@@ -1,0 +1,7 @@
+def solution(phone_book: list) -> bool:
+    phone_book.sort()
+    # 접두사가 서로 같으면 연속적으로 나열되는 규칙
+    for i, n in enumerate(phone_book[1:]):
+        if n.startswith(phone_book[i]):
+            return False
+    return True
