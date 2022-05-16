@@ -1,0 +1,11 @@
+def solution(d, budget):
+    d.sort()
+    idx, tot, cnt = 0,0,0
+    while tot < budget and idx < len(d):
+        tot += d[idx]
+        if tot > budget :
+            break
+        cnt+=1
+        idx+=1
+    answer = cnt
+    return answer
