@@ -1,0 +1,6 @@
+def solution(a, b):
+    import datetime
+    # datetime은 0:월 ~ 6:일
+    yoil = ["MON","TUE","WED","THU","FRI","SAT", "SUN"]
+    idx = datetime.datetime(2016, a, b).weekday()
+    return yoil[idx]
