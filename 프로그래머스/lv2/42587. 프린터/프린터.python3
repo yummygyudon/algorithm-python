@@ -1,0 +1,14 @@
+from collections import deque
+def solution(priorities, location):
+    ls = [(priorities[i], i) for i in range(len(priorities))]
+    deq = deque(ls)
+    cnt = 0
+    while deq :
+        v = deq.popleft()
+        if deq and v[0] < max(deq)[0] :
+            deq.append(v)
+        else :
+            cnt += 1
+            if v[1] == location :
+                break
+    return cnt
