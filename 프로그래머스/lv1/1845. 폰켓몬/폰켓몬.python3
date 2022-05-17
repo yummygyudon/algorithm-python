@@ -1,0 +1,8 @@
+def solution(nums):
+    able = len(nums)//2
+    type = list(set(nums))
+    if able < len(type) :
+        answer = able
+    else : 
+        answer = len(type)
+    return answer
