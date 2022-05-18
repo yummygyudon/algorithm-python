@@ -1,0 +1,30 @@
+def solution(answers):
+    d = {"1" : [1, 2, 3, 4, 5],
+        "2" : [2, 1, 2, 3, 2, 4, 2, 5] ,     
+        "3" : [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]}
+    f,s,t = 0, 0, 0
+    f_cor, s_cor, t_cor = 0, 0, 0
+    a = len(answers)
+    for i in range(a) :
+        f = i % 5
+        s = i % 8
+        t = i % 10
+
+        f_a, s_a, t_a = d["1"][f], d["2"][s], d["3"][t]
+        if f_a == answers[i] :
+            f_cor += 1
+        if s_a == answers[i] :
+            s_cor += 1
+        if t_a == answers[i] :
+            t_cor += 1
+    
+    result = [f_cor, s_cor, t_cor]
+    d["1"] = f_cor
+    d["2"] = s_cor
+    d["3"] = t_cor
+    mx = max(result)
+    answer=[]
+    for s in ["1", "2", "3"] :
+        if d[s] == mx :
+            answer.append(int(s))
+    return answer
