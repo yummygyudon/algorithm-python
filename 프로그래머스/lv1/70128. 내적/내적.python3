@@ -1,0 +1,6 @@
+def solution(a, b):
+    # a[0]*b[0] + ... + a[n-1]*b[n-1]
+    answer = 0
+    for i in range(len(a)) :
+        answer += (a[i]*b[i])
+    return answer
