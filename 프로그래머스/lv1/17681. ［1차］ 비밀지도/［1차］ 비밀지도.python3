@@ -1,0 +1,28 @@
+def make_binary(squared, n) :
+    arr=[]
+    while n > 1 :
+        bNum = str(n%2)
+        arr.append(bNum) # 1 0 0 
+        n = n//2 # 4 2 1
+    arr.append(str(n)) # 1
+    if len(arr) < squared :
+        while len(arr) < squared :
+            arr.append("0")
+    arr.reverse()
+    return arr
+
+def solution(n, arr1, arr2):
+    answer = []
+    for i in range(n):
+        line1 = make_binary(n,arr1[i])
+        line2 = make_binary(n,arr2[i])
+        line = ""
+        # print(line1, end="\n")
+        # print(line2, end="\n")
+        for k in range(n):
+            if line1[k] == "1" or line2[k] == "1" :
+                line += "#"
+            else :
+                line += " "
+        answer.append(line) 
+    return answer
