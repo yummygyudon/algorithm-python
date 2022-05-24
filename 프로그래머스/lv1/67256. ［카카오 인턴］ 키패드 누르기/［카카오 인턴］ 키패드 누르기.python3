@@ -60,6 +60,12 @@ def CalcDistance(list_a, list_b):
         distance += abs(list_b[i] - list_a[i])
     return distance
 
+"""
+# Test 13번부터 쭈르륵 실패
+# 이유 : 상하좌우 이동이라는 전제가 있기 때문에 
+        유클리드 호제법이 아닌 "맨허튼 거리 계산법"을 사용해야 한다.
+        (가로 좌표끼리의 차) + (세로좌표기리의 차) 의 합
+"""
 # from math import dist
 # def solution(numbers, hand):
 #     d = {
