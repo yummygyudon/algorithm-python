@@ -1,0 +1,32 @@
+def pick_up(board, depth,line):
+    idx=0
+    now = 0
+    while True :
+        if idx == depth:
+            break
+        now = board[idx][line]
+        board[idx][line] = 0
+        if now != 0 :
+            break
+        else :
+            idx+=1
+    return (board, now)
+        
+def solution(board, moves):
+    result=[]
+    answer = 0
+    depth = len(board)
+    for m in moves :
+        board, doll = pick_up(board, depth, m-1)
+        if doll == 0 :
+            continue
+        else :
+            result.append(doll)
+            if len(result) >= 2:
+                if result[-1] == result[-2] :
+                    result.pop()
+                    result.pop()
+                    answer += 2
+                
+    
+    return answer
