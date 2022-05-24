@@ -1,0 +1,108 @@
+fingerPoses = {'left':10, 'right':12} # 처음 시작값 (그냥 함수들 밖에 Global 변수로 선언해도 된다는 점 명심)
+
+def solution(numbers, hand):
+    answer = ''
+    for i in numbers:
+        print(fingerPoses)
+        answer += judgeHand(i,hand)
+    return answer
+
+def press(number,usingHand):
+    fingerPoses[usingHand] = number # 해당 손가락 위치 갱신
+    if usingHand == 'left':
+        return 'L'
+    elif usingHand == 'right':
+        return 'R'
+
+def judgeHand(number,hand): 
+    if number in [1,4,7]:
+        return press(number,'left')    
+    elif number in [3,6,9]:
+        return press(number,'right')    
+    else:# 가운데 숫자일 땐 ChooseHand로 움직인 손 얻어오기
+        return press(number,ChooseHand(number,hand)) 
+
+
+def ChooseHand(number,hand):
+    traget_pos = CalcPos(number) # 눌러야할 가운데 숫자 위치
+    left_pos = CalcPos(fingerPoses['left'])
+    right_pos = CalcPos(fingerPoses['right'])     
+
+    """맨허튼 거리 계산 방법"""
+    # 왼손이 더 멀면 -> 오른손으로 누르게
+    if CalcDistance(right_pos, traget_pos) < CalcDistance(left_pos, traget_pos):
+        return 'right'
+    # 오른손이 더 멀면 -> 왼손으로 누르게
+    elif CalcDistance(left_pos, traget_pos) < CalcDistance(right_pos, traget_pos):
+        return 'left'
+    else:
+        # 똑같으면 편한 손
+        return hand
+
+def CalcPos(num):
+    if num == 0: # 가운데 숫자가 0이면 11이라고 가정(나머지가 2가 되야함)
+        num = 11
+      
+    # 가로 위치 (left_pos 와 right_pos를 위한 식)
+    if num%3 == 0: # 3,6,9 
+        x = 3
+    else: 
+        x = num%3   
+      
+    # 높이(세로위치)
+    y = (num+2)//3   
+    pos_list = [x,y]
+    return pos_list
+
+def CalcDistance(list_a, list_b):
+    distance = 0
+    for i in range(2): # (가로 좌표끼리의 차) + (세로좌표기리의 차) 의 합 == " 맨허튼 거리 "
+        distance += abs(list_b[i] - list_a[i])
+    return distance
+
+# from math import dist
+# def solution(numbers, hand):
+#     d = {
+#         1: [1, 4],
+#         2: [2, 4],
+#         3: [3, 4],
+#         4: [1, 3],
+#         5: [2, 3],
+#         6: [3, 3],
+#         7: [1, 2],
+#         8: [2, 2],
+#         9: [3, 2],
+#         10: [1, 1],
+#         0: [2, 1],
+#         12: [3, 1]
+#     }
+#     answer = ''
+#     pos_left = d[10]
+#     pos_right = d[12]
+#     left = [1, 4, 7]
+#     right = [3, 6, 9]
+#     for n in numbers:
+#         if n in left:
+#             pos_left = d[n]
+#             answer += "L"
+#         elif n in right:
+#             pos_right = d[n]
+#             answer += "R"
+#         else:
+#             btn_pos = d[n]
+#             l = dist(btn_pos, pos_left)
+#             r = dist(btn_pos, pos_right)
+#             if l > r:
+#                 pos_right = btn_pos
+#                 answer += "R"
+#             elif r > l:
+#                 pos_left = btn_pos
+#                 answer += "L"
+#             else:
+#                 if hand == "right":
+#                     pos_right = btn_pos
+#                     answer += "R"
+#                 else:
+#                     pos_left = btn_pos
+#                     answer += "L"
+#     return answer
