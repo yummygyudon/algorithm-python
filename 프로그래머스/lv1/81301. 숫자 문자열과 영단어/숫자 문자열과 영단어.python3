@@ -2,6 +2,12 @@ import re
 d = {"zero" : 0, "one" : 1, "two" : 2, "three" : 3, "four" : 4,
      "five" : 5, "six" : 6, "seven" : 7, "eight" : 8, "nine" : 9}
 def solution(s) :
+    # 남의 풀이 -> replace 함수 활용
+    # 위 dictionary의 value들은 숫자말고 "0", "1" ,...와 같이 문자열 값을 value로 설정
+    # answer = s
+    # for key, value in num_dic.items():
+    #     answer = answer.replace(key, value)
+    #return answer
     num_str = ["zero","one","two","three","four","five","six","seven","eight","nine"]
     num = ["0","1", "2", "3", "4","5","6","7","8","9"]
     list_str = re.split(r'[0-9]',s)
@@ -19,4 +25,4 @@ def solution(s) :
                 if s[idx:].startswith(ns) :
                     idx += len(ns)
                     answer += str(d[ns])
-    return int(answer) 
+    return int(answer)
