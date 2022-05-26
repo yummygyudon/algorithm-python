@@ -1,0 +1,38 @@
+# import string
+import re
+# alp = list(string.ascii_lowercase)
+# ALP = list(string.ascii_uppercase)
+# specialChar = list("-_.~!@#$%^&*()=+[{]}:?,<>/")
+def solution(new_id) :
+    answer = new_id
+    answer = answer.lower()#1단계
+    answer = re.sub(r'[^a-z0-9-_\.]','', answer)#2단계
+    answer = re.sub(r'\.+', '.', answer)#3단계
+    answer = re.sub(r'^[.]|[.]$', '', answer)#4단계
+    for i in range(5,8):
+        # if i == 1 :
+            # for AL, al in zip(ALP,alp): 
+            #     answer = answer.replace(AL, al)
+            
+        # elif i == 2 :
+            # l = re.split(r'[^-_.(a-z)(0-9)]', answer)
+            # answer = ''.join(l)
+        # elif i == 3 :
+        #     answer = re.sub('[.]{2,}','.' ,answer)
+        # if i == 4 :
+        #     if answer.startswith('.') :
+        #         answer = re.sub('^.','' ,answer)
+        #     if answer.endswith('.'):
+        #         answer = re.sub('.$','' ,answer)
+        if i == 5 :
+            if answer=='':
+                answer='a'
+        elif i == 6 :
+            if len(answer) >= 16 :
+                answer = answer[:15]
+                answer = re.sub(r'[.]$', '', answer)
+        else :
+            if len(answer) <= 2 :
+                while len(answer) != 3 :
+                    answer += answer[-1]
+    return answer
