@@ -1,0 +1,18 @@
+socre_board = {6 : 1,
+               5 : 2,
+               4 : 3,
+               3 : 4,
+               2 : 5,
+               1 : 6,
+               0 : 6 }
+def solution(lottos, win_nums):
+    mx, mn = 0, 0 
+    cnt_zero = lottos.count(0)
+    mx = cnt_zero
+    for l in lottos :
+        if(l in win_nums) :
+            mx+=1
+            mn+=1
+    mx_score = socre_board[mx]
+    mn_score = socre_board[mn]
+    return [mx_score, mn_score]
