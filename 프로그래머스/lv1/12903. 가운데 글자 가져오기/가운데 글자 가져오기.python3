@@ -1,0 +1,7 @@
+def solution(s):
+    i = len(s)
+    if i%2 == 0 :
+        answer = s[(i//2)-1:(i//2)+1]
+    else :
+        answer = s[len(s)//2]
+    return answer
