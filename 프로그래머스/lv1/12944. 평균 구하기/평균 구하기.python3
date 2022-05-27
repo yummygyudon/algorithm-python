@@ -1,0 +1,5 @@
+def solution(arr):
+    answer = sum(arr)/len(arr)
+    if sum(arr)%len(arr) == 0:
+        answer = int(answer)
+    return answer
