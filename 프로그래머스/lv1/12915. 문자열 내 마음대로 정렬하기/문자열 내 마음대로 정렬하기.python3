@@ -1,0 +1,12 @@
+def solution(strings, n):
+    d = dict()
+    strings.sort()
+    ls = []
+    for i in range(1, len(strings)+1):
+        ls.append([strings[i-1][n], i])
+        d[i] = strings[i-1]
+    ls.sort()
+    answer =[]
+    for _, i in ls:
+        answer.append(d[i])
+    return answer
