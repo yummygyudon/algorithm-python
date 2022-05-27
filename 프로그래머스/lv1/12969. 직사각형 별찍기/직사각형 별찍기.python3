@@ -1,0 +1,7 @@
+a, b = map(int, input().strip().split(' '))
+
+if a > 1000 or b > 1000:
+    print("제한조건에 의해 실행할 수 없습니다.")
+else :
+    for _ in range(b):
+        print(a*"*")
