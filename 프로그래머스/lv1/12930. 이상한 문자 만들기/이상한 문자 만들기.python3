@@ -1,0 +1,12 @@
+def solution(s):
+    words = s.split(' ')
+    new = []
+    for w in words :
+        s=[]
+        for i in range(len(w)):
+            if i%2 == 0 :
+                s.append(w[i].upper())
+            else :
+                s.append(w[i].lower())
+        new.append(''.join(s))
+    return " ".join(new)
