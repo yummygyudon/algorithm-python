@@ -1,0 +1,6 @@
+def solution(n):
+    num = list(str(n))
+    a = 0
+    for i in num :
+        a += int(i)
+    return a
