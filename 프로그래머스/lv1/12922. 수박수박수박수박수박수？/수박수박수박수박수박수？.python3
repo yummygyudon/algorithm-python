@@ -1,0 +1,6 @@
+def solution(n):
+    word = '수박'
+    ls= []
+    for i in range(n) :
+        ls.append(word[i%2])
+    return ''.join(ls)
