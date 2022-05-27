@@ -1,0 +1,8 @@
+def solution(n):
+    import math
+    sqrt = math.sqrt(n)
+    if (sqrt-int(sqrt)) != 0 :
+        answer = -1
+    else :
+        answer = (sqrt+1)**2
+    return answer
