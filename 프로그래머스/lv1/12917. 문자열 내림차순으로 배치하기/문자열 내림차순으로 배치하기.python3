@@ -1,0 +1,5 @@
+def solution(s):
+    str_s = list(s)
+    sort_s = sorted(str_s, reverse=True)
+    answer = ''.join(sort_s)
+    return answer
