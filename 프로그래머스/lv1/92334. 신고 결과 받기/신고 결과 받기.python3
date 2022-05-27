@@ -1,0 +1,35 @@
+def solution(id_list, report, k):
+    r = list(set(report))
+#     d_reported = {id : set() for id in id_list} # 각 아이디별 신고당한 횟수
+#     d_mail = {id : 0 for id in id_list} # 각 아이디별 메일 받은 횟수
+#     answer = []
+#     for s in r :
+#         reporter, respondent = s.split()
+#         d_reported[respondent].add(reporter) # 피신고자 : 신고자
+
+#     for k, v in d_reported.items() :
+#         if len(v) >= k :
+#             for rptr in v :
+#                 d_mail[rptr] += 1
+#     for id in id_list :
+#         answer.append(d_mail[id])
+
+    
+    d_reported = {id : 0 for id in id_list} # 각 아이디별 신고당한 횟수
+    d_target = {id : set() for id in id_list} # 각 아이디별 신고한 id
+    d_mail = {id : 0 for id in id_list} # 각 아이디별 메일 받은 횟수
+    answer = []
+    for s in r :
+        reporter, respondent = s.split()
+        d_target[reporter].add(respondent) # 신고한 id 등록
+        d_reported[respondent] += 1 # 신고 당한 횟수
+
+    for id in id_list :
+        if len(d_target[id]) > 0 : # 신고한 사람이 1명 이상일 때
+            ls = list(d_target[id]) # set를 list로 변환
+            for i in ls :
+                if d_reported[i] >= k : # 내가 신고한 사람이 2회 이상 신고당한 사람일 때
+                    # 신고자에게 메일이 가므로 +1
+                    d_mail[id] += 1
+        answer.append(d_mail[id])
+    return answer
