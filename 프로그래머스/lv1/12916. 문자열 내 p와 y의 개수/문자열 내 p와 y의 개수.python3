@@ -1,0 +1,9 @@
+def solution(s):
+    p =0
+    y =0
+    for alp in list(s) :
+        if alp == 'p' or alp == 'P' :
+            p += 1
+        elif alp == 'y' or alp == 'Y' :
+            y += 1
+    return p == y
