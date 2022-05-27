@@ -1,0 +1,7 @@
+def solution(x):
+    result = x%sum([int(num) for num in str(x)])
+    if (result == 0) :
+        answer = True
+    else :
+        answer = False
+    return answer
