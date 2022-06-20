@@ -1,0 +1,21 @@
+def solution(scoville, K):
+    import heapq
+    from collections import deque
+    answer = 0
+    heap = []
+    for s in scoville :
+        heapq.heappush(heap, s)
+        
+    able = True
+    while heap[0] < K :
+        mn_scovill = heapq.heappop(heap)
+        next_mn = heapq.heappop(heap)
+        mix = mn_scovill + (next_mn*2)
+        answer += 1
+        heapq.heappush(heap, mix)
+        if len(heap) == 1 and heap[0] < K:
+            able = False
+            break
+    if not able :
+        return -1
+    return answer
