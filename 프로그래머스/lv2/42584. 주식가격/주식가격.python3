@@ -1,0 +1,43 @@
+def solution(prices):
+    from collections import deque
+    ans = [i for i in range(len(prices)-1,-1,-1)] # 4,3,2,1,0
+    stack = [0] # 조회할 idx 저장할 stack
+    # 첫 번째 요소는 순회할 때마다 pop되서 계산됨
+    # idx 0번 : 줄어들면 요소 갯수만큼 while에서 조회됨( 단, 안줄어들면 계속 stack에 삽입됨 )
+    
+    for i in range(1,len(prices)) : # 1,2,3,4
+        while stack and prices[stack[-1]] > prices[i] : # 3번째 경우 -> prices[2] : 3 & prices[3] : 2
+            # 다음 반복인 stack[1] 은 동일한 2이기 때문에 while문 안돎
+            # 마지막인 prices[3] : 2  & prices[4] : 3
+            k = stack.pop() # 2 # 3
+            ans[k] = i - k # answer[2] = 3 - 2 = 1 # answer[3] = 4 - 3
+        stack.append(i)
+        
+        
+    q = deque()
+    
+    idx = len(prices)-2 #3
+    # check[0] += 1
+    # for t in times :
+    #     now = q.popleft()
+    # for t in range(times) :
+    #     sec = 0
+    #     for i in range(t+1,times) :
+    #         if prices[t] <= prices[i] :
+    #             sec += 1
+    #     check[t] = sec
+    # cnt = 0
+    # mn = prices.pop()
+    # check[-1] = 0
+    # while len(prices) > 0 :
+    #     now = prices.pop()
+    #     print(cnt)
+    #     if now <=  mn :
+    #         cnt += 1
+    #         check[idx] = cnt
+    #         mn = now
+    #     else :
+    #         check[idx] += cnt
+    #         cnt = 0
+    #     idx -= 1
+    return ans
