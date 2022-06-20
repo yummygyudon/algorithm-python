@@ -1,5 +1,7 @@
 def solution(prices):
-    from collections import deque
+    """
+    < Stack 사용하는 방법 >
+    """
     ans = [i for i in range(len(prices)-1,-1,-1)] # 4,3,2,1,0
     stack = [0] # 조회할 idx 저장할 stack
     # 첫 번째 요소는 순회할 때마다 pop되서 계산됨
@@ -13,31 +15,19 @@ def solution(prices):
             ans[k] = i - k # answer[2] = 3 - 2 = 1 # answer[3] = 4 - 3
         stack.append(i)
         
-        
-    q = deque()
     
-    idx = len(prices)-2 #3
-    # check[0] += 1
-    # for t in times :
-    #     now = q.popleft()
-    # for t in range(times) :
-    #     sec = 0
-    #     for i in range(t+1,times) :
-    #         if prices[t] <= prices[i] :
-    #             sec += 1
-    #     check[t] = sec
-    # cnt = 0
-    # mn = prices.pop()
-    # check[-1] = 0
-    # while len(prices) > 0 :
-    #     now = prices.pop()
-    #     print(cnt)
-    #     if now <=  mn :
-    #         cnt += 1
-    #         check[idx] = cnt
-    #         mn = now
-    #     else :
-    #         check[idx] += cnt
-    #         cnt = 0
-    #     idx -= 1
+    """
+    < Queue 사용하는 방법 >
+    """
+    from collections import deque
+    q = deque(prices)
+    ans = []
+    while q :
+        p = q.popleft()
+        cnt = 0
+        for price in q : # 앞에서부터 prices에 있는 값들
+            cnt+=1
+            if p > price : # 줄어든 경우
+                break
+        ans.append(cnt)
     return ans
