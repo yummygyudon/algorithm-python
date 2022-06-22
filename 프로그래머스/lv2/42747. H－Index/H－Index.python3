@@ -1,0 +1,42 @@
+# def over_H(citations,valueH) :
+#     ls = []
+#     for n in citations :
+#         if n >= valueH :
+#             ls.append(n)
+#     return ls
+# def under_H(citations,valueH) :
+#     ls = []
+#     for n in citations :
+#         if n < valueH :
+#             ls.append(n)
+#     return ls
+
+# def count_over(citations,valueH) :
+#     count = 0
+#     for n in citations :
+#         if n >= valueH :
+#             count += 1
+#     return count
+# # def count_under(citations,valueH, overCitations) :
+# #     count = 0
+# #     for n in citations :
+# #         if n not in  n <= valueH :
+# #             count += 1
+# #     return count
+
+def solution(citations):
+    citations.sort(reverse = True)
+    unable=True
+    idx = len(citations)
+    if citations[-1] >= (idx-1) :
+        return idx
+    
+    for i in range(idx): 
+        # [6 5 3 1 0]
+        # [0 1 2 3 4] idx
+        # [1 2 3 4 5] 
+        #     정답
+        count = citations[i] # i : 2 -> 
+        if i >= count :
+            return i
+        
