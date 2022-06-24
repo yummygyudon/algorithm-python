@@ -1,0 +1,103 @@
+"""
+1차 풀이 실패( dfs 시도 )
+"""
+# def dfs(now_alp, find_alp, stack, letters, move) :
+#     global mn
+#     if now_alp == find_alp :
+#         mn = min(mn, move)
+#         return
+#     for i in range(4):
+#         l = letters.copy()
+#         s = stack.copy()
+#         if i == 0:
+#             l.rotate(-1)
+#             dfs(l[0], find_alp, s, l, move+1)
+#         elif i== 1:
+#             l.rotate(2)
+#             dfs(l[0], find_alp, s, l, move+1)
+#         elif i== 2:
+#             s.rotate(-1)
+#             dfs(s[0], find_alp, s, l, move+1)
+#         else :
+#             s.rotate(2)
+#             dfs(s[0], find_alp, s, l, move+1)
+        
+# #     dfs(letters[0], find_alp, stack, letters.rotate(2), move+1)    
+# #     dfs(stack[0], find_alp, stack.rotate(-1), letters, move+1)    
+# #     dfs(stack[0], find_alp, stack.rotate(2), letters, move+1)
+  
+"""
+JAZ 를 만드는 방법( 처음 시작 : AAA)
+1. A에서 J로 이동(BCDEFGHIJ -> 위로 9번 이동)
+2. 다음 글자부터는 A가 1번 반복되기이기 때문에 연속된 A를 피해 2가지 방법을 택할 수 있다.
+    ( 오른쪽으로 연속된 A를 건너뛰어 이름에서 A가 아닌 글자까지 커서이동하는 방법 / 역으로  마지막 위치로 돌아가 왼쪽으로 이동해 A가 아닌 글자까지 커서 이동하는 방법)
+3-1 . 오른쪽으로 커서이동 시, J->A->Z 2번 커서 이동
+3-2 . 왼쪽으로 커서이동 시, J->Z 1번 커서 이동 (채택)
+    ( 해당 경우, 왔었던 만큼 다시 커서를 이동해서 돌아가야함 )
+4. Z가 되야할 A를 아래로 1번 이동
+
+9 + 1 + 1
+"""
+def solution(name):
+    ans = 0
+    
+    #name에서 이동이 가장 작은 경우 : 모든 글자가 A인 경우( ex. AAA = 2번 이동하면 끝 글자까지 완성 )
+    mn_move = len(name) - 1
+    
+    # 단, 마지막에 연속적인 A로만 구성되어있는 단어가 있는경우, 마지막 연속적 A의 자릿수는 커서이동할 필요가 없기 때문에 빼줘야한다.
+    while name[mn_move] == "A" and mn_move > 0 :
+        mn_move -= 1
+    if(mn_move < 0) :
+        return 0
+    
+    for char_pos, char in enumerate(name) : # (현재까지 온 name 내 위치, 현재 글자)
+        
+        # 시작값인 A에서 char까지 가는 "상하 이동"의 경우( 알파벳에서의 이동 )
+        # A -> char(위로 이동) / A -> Z -> char (아래로 이동하는 경우_a에서 z를 가려면 1번 이동 : +1)  
+        # A일 경우는 알아서 += 0
+        ans += min( ord(char)-ord("A"), ord("Z")-ord(char)+1 )   
+        
+        # 다음 계산할 위치까지 이동하는 "좌우 이동"의 경우( name에서의 이동)
+        # next 는 다음 검사할 문자의 idx
+        
+        '''
+        AAAABABAAAA 의 경우, (길이 : 11)
+        첫번째 A(pos=0)일 때, 
+        처음 next = 1(A) +1(A) +1(A)
+        min(10, 0*2+(11-3), 0+(11-3)*2) = (10, 8, 16)
+        '''
+        next = char_pos + 1
+        while next <= len(name)-1 and name[next] == "A" : # name 길이를 넘어가지 않고 A인경우 == 조작을 안해도 된다.
+            next += 1    
+        mn_move = min(mn_move, char_pos*2+(len(name)-next) , char_pos+((len(name)-next)*2) )
+    ans += mn_move
+    return ans 
+
+
+    """
+    [1차 시도]
+    아..처음에는 name 길이만큼 A가 연속적으로 구성되어있는 상태
+    AAA..처럼 A로만 이루어져있으면 이동 안해도됨.
+    """
+#     from collections import deque
+#     import string
+#     alps = deque(list(string.ascii_uppercase))
+#     name_alp = list(name)
+#     stack = deque()
+#     stack.append("A")
+#     # ord("a") 는 97 ord("Z") 는 90 ord("A") 는 65
+#     count = 0
+#     for a in name_alp :
+#         global mn
+#         mn = 0
+#         dfs(stack.pop(), a, stack, alps, 0)
+#         count += mn
+#         while alps[0] != a :
+#             alps.rotate(-1)
+#         stack.append(a)
+    
+# #     while alpabet :
+# #         now = alpabet.popleft()
+# #         idx = ord(now)
+        
+#     return 
