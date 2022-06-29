@@ -6,7 +6,8 @@ def solution(arr1, arr2):
     def get_matrix_mul(yOfArr1,xOfArr2) :
         result = 0
         row = arr1[yOfArr1] # 1, 4
-        for i in range(len(arr2)) :
+        for i in range(len(arr2)) : # Arr2 행 == row의 열번호 / Arr1 열번호 ==  Arr2 행 번호( Arr2의 최대행 개수)  
+            # 0, 1 (Arr2의 최대행 갯수)
             result += row[i] * arr2[i][xOfArr2]
         return result    
 
