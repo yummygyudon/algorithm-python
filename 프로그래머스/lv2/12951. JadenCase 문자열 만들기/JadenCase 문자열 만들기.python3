@@ -1,0 +1,36 @@
+def solution(s):
+    """ 
+    공백을 기준으로 분리해서 capitalize()함수를 통해 첫글자 대문자화 & 공백 붙여주기 
+    마지막 단어 뒤에 들어가는 공백 제거를 위해 rstrip()
+    """
+    # ls = list(s.split(" "))
+    # answer=""
+    # for word in ls :
+    #     answer += word.capitalize()
+    #     answer+= " "
+    # answer = answer.rstrip()
+    import string
+    s = list(s)
+    answer = ""
+    IntBefore = False
+    SpaceBefore = True
+    for alp in s:
+        if alp == " " :
+            answer += " "
+            SpaceBefore = True
+        elif alp not in string.ascii_letters :
+            if SpaceBefore :
+                SpaceBefore = False
+            IntBefore = True
+            answer += alp
+        else : 
+            alp = alp.lower()
+            if SpaceBefore :
+                answer += alp.upper()
+                SpaceBefore = False
+            else :
+                if IntBefore :
+                    IntBefore = False
+                answer += alp
+                
+    return answer
