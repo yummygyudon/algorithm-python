@@ -1,0 +1,17 @@
+def solution(arr1, arr2):
+    arr1_h = len(arr1)
+    arr2_w = len(arr2[0])
+    answer = [[0]*arr2_w for _ in range(arr1_h)]
+    
+    def get_matrix_mul(yOfArr1,xOfArr2) :
+        result = 0
+        row = arr1[yOfArr1] # 1, 4
+        for i in range(len(arr2)) :
+            result += row[i] * arr2[i][xOfArr2]
+        return result    
+
+    for i in range(arr1_h) : # 0, 1, 2
+        for j in range(arr2_w) : # 0, 1
+            answer[i][j] = get_matrix_mul(i,j)
+            
+    return answer
