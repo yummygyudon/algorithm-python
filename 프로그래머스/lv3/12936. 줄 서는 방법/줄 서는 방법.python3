@@ -78,6 +78,8 @@ def solution(n, k) :
             result.append(person[cycle])
             person.pop(cycle)
         else :
+            # 다음 순서부터 k=0이기 때문에 더이상 돌 사이클 없다 == 가장 마지막 순서 == 현재 상황에서 가장 큰 순서대로 나열
+            # 최초 발견시 우선적으로 마지막 사이클 마무리 -> 다음 자릿수 for문에서 역순 나열
             result.append(person[cycle-1])
             person.pop(cycle-1)
         n-=1
