@@ -1,0 +1,18 @@
+def solution(s):
+    nums = s.split(' ')
+    mn = 1e9
+    mx = -1e9
+    for n in nums :
+        print(n)
+        if n.startswith('-') :
+            n = int(n[1:])
+            n = -n
+        else : 
+            n = int(n)
+        mx = max(mx, n)
+        mn = min(mn, n)
+    result = []
+    result.append(str(mn))
+    result.append(str(mx))
+    answer = ' '.join(result)
+    return answer
