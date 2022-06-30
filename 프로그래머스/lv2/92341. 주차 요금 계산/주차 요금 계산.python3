@@ -1,0 +1,96 @@
+# def get_first_fee(fees , Time) :
+#     charge = fees[1]
+#     if Time > fees[0] :
+#         # 기본 요금 계산
+#         Time -= fees[0]
+#         charge += fees[3] * math.ceil(Time/fees[2])
+#     return charge
+
+# def get_again_fee(fees, Time) :
+#     charge = fees[3]
+#     if Time > fees[2] :
+#         # 기본 요금 계산
+#         Time -= fees[2]
+#         charge += fees[3] * math.ceil(Time/fees[2])
+    # return charge
+import math    
+def get_fee(fees, Time) :
+    charge = fees[1]
+    if Time > fees[0] :
+        # 기본 요금 계산
+        Time -= fees[0]
+        charge += fees[3] * math.ceil(Time/fees[2])
+    return charge
+        
+def get_minute(strTime) :
+    hour, minute = strTime.split(':')
+    return (int(hour)*60 + int(minute))
+
+def solution(fees, records):
+    """
+    출차 내역 없으면 : 23:59로 간주
+    초과시간 -> 단위시간으로 나누어 떨어지지 않으면 '올림'
+    
+    """
+    # fees : 요금표 ( [0] : 기본시간 / [1] : 기본요금 / [2] : 단위시간 / [3] : 단위요금)
+    # records 요소 구성 : "시각 차량번호 입출여부"
+    
+    In_table = dict() # 주차 상황표 -> { 차량 : 입차시간 }
+    # Out_table = dict() # 주차 상황표 -> { 차량 : 출시간 }
+    TotalTime_table = dict()
+    Charge_table = dict() # 차량별 부과 요금표 { 차량 : 요금 }
+    cars = set()
+    
+    lastTime = (23*60)+59
+    for info in records :
+        time, number, INOUT = info.split(' ')
+        cars.add(number)
+        if INOUT == 'IN' :
+            inTime = get_minute(time)
+            In_table[number] = inTime
+        else :
+            outTime = get_minute(time)
+            inTime = In_table[number]
+            total = outTime - inTime
+            print(total) 
+            del In_table[number]
+            
+            if number in TotalTime_table :
+                TotalTime_table[number] += total
+            else :
+                TotalTime_table[number] = total
+            print(TotalTime_table[number])
+    if In_table :
+        while In_table :
+            number, inTime = In_table.popitem()
+            total = lastTime - inTime
+            if number in TotalTime_table :
+                TotalTime_table[number] += total
+            else :
+                TotalTime_table[number] = total
+            print(TotalTime_table[number])
+
+#             if number in Charge_table :
+#                 charge = get_again_fee(fees, total)
+#                 Charge_table[number] += charge
+#             else :
+#                 charge = get_first_fee(fees, total)
+#                 Charge_table[number] = charge
+                
+#             print(Charge_table[number])
+#     if In_table :
+#         while In_table :
+#             number, inTime = In_table.popitem()
+#             total = lastTime - inTime
+#             if number in Charge_table :
+#                 charge = get_again_fee(fees, total)
+#                 Charge_table[number] += charge
+#             else :
+#                 charge = get_first_fee(fees, total)
+#                 Charge_table[number] = charge
+    car_history = list(cars)
+    car_history.sort()
+    answer = []
+    for c in car_history :
+        answer.append(get_fee(fees, TotalTime_table[c]))
+    return answer                   
