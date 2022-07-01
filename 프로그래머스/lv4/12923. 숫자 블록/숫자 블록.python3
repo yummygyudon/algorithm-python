@@ -15,28 +15,12 @@ def solution(begin, end):
             if cycle > 1e7 :
                 continue
             if  i % k == 0:
-                answer.append(cycle) # 2일때 -> 4와 8 모두 2지만 4일 경우 -> 8이 다시 4로 바뀔 예정이기 때문에
+                answer.append(cycle) # 2일때 -> 4와 8 모두 2지만 4일 경우 -> 8이 다시 4로 바뀔 예정이기 때문에 조심
                 # 바로 break
+                # 소수 아니라고 체크
+                isPrime = False
                 break
             # 소수일 경우
-        # if isPrime :
-        else :
+        if isPrime :
             answer.append(1)
     return answer
-    
-#     limit = int(sqrt(end)) 
-#     blocks = [1]*(int(sqrt(1e9))+1)
-#     blocks[0] = 0
-    
-#     for i in range(2, limit) : # n의 범위 2,3,4,5
-#         k = 2
-#         while True :
-#             idx = i*k
-#             if idx > limit :
-#                 break
-#             # print(idx)
-#             blocks[idx-1] = i
-#             k+= 1
-#         # print(blocks[begin-1:end])
-#     start_l = int(sqrt(begin)) 
-#     return blocks[start_l-1:limit]
