@@ -1,24 +1,35 @@
-def find_parent(Parent, x) :
-    if Parent[x] != x :
-        Parent[x] = find_parent(Parent,Parent[x])
-    return Parent[x]
+import sys
+from collections import deque
+input = sys.stdin.readline
 
-def union_parent(Parent, a, b) :
-    a = find_parent(Parent,a)
-    b = find_parent(Parent,b)
-    if a < b :
-        Parent[b] = a
-    else :
-        Parent[a] = b
+def bfs(node):
+    q = deque()
+    q.append(node)
+    while q:
+        n = q.popleft()
+        for neighbor in GRAPH[n] :
+            if not VISIT[neighbor]:
+                q.append(neighbor)
+                VISIT[neighbor] = True
+
+
 N, M = map(int, input().split())
-route = [list(map(int,input().split())) for _ in range(M)]
 
-Parent = [0] * (N+1)
-for i in range(N+1):
-    Parent[i] = i
+GRAPH = [[] for _ in range(N+1)]
 
-for _ in range(2) :
-    for x,y in route :
-        union_parent(Parent, x, y)
+for _ in range(M):
+    v1,v2 = map(int, input().split())
+    GRAPH[v1].append(v2)
+    GRAPH[v2].append(v1)
 
-print(len(set(Parent[1:])))
+VISIT = [False] * (N+1)
+cnt = 0
+
+for node in range(1, N+1):
+    if VISIT[node]:
+        continue
+    VISIT[node] = True
+    bfs(node)
+    cnt += 1
+
+print(cnt)
