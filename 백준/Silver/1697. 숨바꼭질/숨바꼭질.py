@@ -1,26 +1,29 @@
+from collections import deque
 import sys
 input = sys.stdin.readline
+HISTORY = [0]*100001
+LIMIT = 100000
+def startGame() :
+    q = deque()
+    q.append(SUBIN)
+    while q :
+        nowPosition = q.popleft()
+        if (nowPosition == BROTHER) :
+            print(HISTORY[nowPosition])
+            break
+        """
+         == 0 논리 연산으로 중복 계산 방지 ( 최초 계산일 경우에만 append )
+        """
+        positionValue = HISTORY[nowPosition]
+        if (0 <= (nowPosition + 1) <= LIMIT) and (HISTORY[nowPosition + 1] == 0) :
+            HISTORY[nowPosition + 1] = positionValue+1
+            q.append(nowPosition + 1)
+        if (0 <= (nowPosition - 1) <= LIMIT) and (HISTORY[nowPosition - 1] == 0) :
+            HISTORY[nowPosition - 1] = positionValue + 1
+            q.append(nowPosition - 1)
+        if (0 <= (nowPosition * 2) <= LIMIT) and (HISTORY[nowPosition * 2] == 0) :
+            HISTORY[nowPosition * 2] = positionValue + 1
+            q.append(nowPosition * 2)
 
-N, K =  map(int, input().split())
-
-counting = [0]*100001
-limit = 100000
-
-from collections import deque
-q = deque()
-q.append(N)
-
-while q:
-    now= q.popleft()
-    if now == K :
-        print(counting[now])
-        break
-    if 0 <= now-1 <= limit and counting[now-1] == 0:
-        counting[now-1] = counting[now]+1
-        q.append(now-1)
-    if 0 <= now+1 <= limit and counting[now+1] == 0 :
-        counting[now+1] = counting[now]+1
-        q.append(now+1)
-    if 0 <= now*2 <= limit and counting[now*2] == 0 :
-        counting[now*2] = counting[now]+1
-        q.append(now*2)
+SUBIN, BROTHER = map(int, input().split())
+startGame()
