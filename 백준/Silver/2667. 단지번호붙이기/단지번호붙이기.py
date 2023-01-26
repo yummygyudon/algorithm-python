@@ -1,37 +1,46 @@
+from collections import deque
 import sys
 input = sys.stdin.readline
+
+#########
 N = int(input())
-Map = []
+MAP = []
+RESULT = []
+
+d = [[0,1],[0,-1],[1,0],[-1,0]]
+"""
+지도 그리기
+"""
 for _ in range(N) :
-    Map.append(list(map(int, input().rstrip())))
+    MAP.append(list(input().strip()))
 
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
+# print(MAP)
+"""
+단지 블럭 개수 계산 메서드
+"""
+def measureArea(y,x) :
+    areaBlockCount = 0
+    q = deque()
+    q.append([y,x])
+    MAP[y][x] = "0"
+    areaBlockCount += 1
+    while q :
+        nowY, nowX = q.popleft()
+        for i in range(4) :
+            nextY = nowY + d[i][0]
+            nextX = nowX + d[i][1]
+            if (0 <= nextX < N and 0 <= nextY < N) and (MAP[nextY][nextX] == "1") :
+                areaBlockCount += 1
+                MAP[nextY][nextX] = "0"
+                q.append([nextY, nextX])
+    RESULT.append(areaBlockCount)
 
-def dfs(x,y) :
-    if x < 0 or x >= N or y < 0 or y >= N:
-        return False
-    if Map[x][y] == 1 :
-        global house_cnt
-        Map[x][y] = 0
-        house_cnt += 1
-        dfs(x+1, y)
-        dfs(x-1, y)
-        dfs(x, y+1)
-        dfs(x, y-1)
-        return True
-    return False
-
-cnt = 0
-Each = []
-house_cnt = 0
-for i in range(N):
+for i in range(N) :
     for k in range(N) :
-        if dfs(i,k) :
-            Each.append(house_cnt)
-            cnt+=1
-            house_cnt = 0
-print(cnt)
-Each.sort()
-for i in Each :
-    print(i)
+        if MAP[i][k] == "1" :
+            measureArea(i, k)
+
+RESULT.sort()
+print(len(RESULT),sep="\n")
+for count in RESULT :
+    print(count,sep="\n")
