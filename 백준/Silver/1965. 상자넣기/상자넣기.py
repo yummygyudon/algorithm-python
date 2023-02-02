@@ -29,10 +29,7 @@ for i in range(1,N) : # 1,2,3,4,5,6,7,8
             # DP[i] = DP[k]+1
             case = DP[k]+1
             MAX = max(MAX, case)
-    if MAX == 1 :
-        DP[i] = 1
-    else :
-        DP[i] = MAX
+    DP[i] = MAX
 
     # DP[i] = MAX
 print(max(DP))
