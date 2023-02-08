@@ -47,4 +47,4 @@ for _ in range(N):
         # 반복문이 break를 통과하지 않았다면
         # 어떠한 알파벳으로도 단축기를 지정할 수 없는 것
         if not done :
-            print(*WORDS)
+            print(" ".join(WORDS))
