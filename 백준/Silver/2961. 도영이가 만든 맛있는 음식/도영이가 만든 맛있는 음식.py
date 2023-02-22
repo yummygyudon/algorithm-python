@@ -11,23 +11,17 @@ for _ in range(N):
     s, b = map(int, input().split())
     INGREDIENT.append([s,b])
 
-index = 1
+from itertools import combinations
+combi = []
+for i in range(1,N+1) :
+    combi.append(combinations(INGREDIENT, i))
 result = 1e9
-
-def multi(nums:list) :
-    result = nums[0]
-    for i in range(1, len(nums)) :
-        result *= nums[i]
-    return result
-
-while index < (1 << N) : # 16가지 경우의 수가 다 돌때 까지
-    MIN = 1e9
-    nowS, nowB = [], []
-    for k in range(N) :
-        if index & (1 << k) :
-            nowS.append(INGREDIENT[k][0])
-            nowB.append(INGREDIENT[k][1])
-            MIN = min(MIN, abs(multi(nowS)-sum(nowB)))
-            result = min(result, MIN)
-    index += 1
+for case in combi :
+    for eachCombi in case :
+        tmp_s = 1
+        tmp_b = 0
+        for ingredient in eachCombi :
+            tmp_s *= ingredient[0]
+            tmp_b += ingredient[1]
+        result = min(result, abs(tmp_s-tmp_b))
 print(result)
