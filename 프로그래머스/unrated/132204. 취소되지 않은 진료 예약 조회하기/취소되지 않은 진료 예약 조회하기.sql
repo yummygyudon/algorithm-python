@@ -1,0 +1,17 @@
+/*
+ * 
+    - 2022년 4월 13일 "취소되지 않은" 흉부외과(CS) 진료 예약 내역 조회
+    - 진료 예약 일시 오름차
+*/
+SELECT ap.APNT_NO, ap.PT_NAME, ap.PT_NO, ap.MCDP_CD, d.DR_NAME, ap.APNT_YMD
+FROM (
+    SELECT a.APNT_NO, a.APNT_YMD, a.MDDR_ID, a.MCDP_CD, p.PT_NO, p.PT_NAME
+    FROM APPOINTMENT as a LEFT JOIN PATIENT as p ON a.PT_NO = p.PT_NO
+    WHERE a.APNT_YMD BETWEEN '2022-04-13 00:00:00.000000' AND '2022-04-13 23:59:59.999999' AND NOT a.APNT_CNCL_YN = "Y" AND MCDP_CD = "CS"
+    ) as ap 
+LEFT JOIN 
+    (
+    SELECT DR_ID, MCDP_CD, DR_NAME
+    FROM DOCTOR) as d 
+ON ap.MDDR_ID = d.DR_ID
+ORDER BY ap.APNT_YMD
